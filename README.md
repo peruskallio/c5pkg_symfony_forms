@@ -1,7 +1,7 @@
 # Symfony forms for concrete5
 
-This is a composer package that provides the possibility to use Symfony forms within concrete5.
-The advantages are obvious if you have read anything about them but to list a few:
+This is a composer package that provides the possibility to use [Symfony forms](https://symfony.com/doc/current/book/forms.html)
+within concrete5. The advantages are obvious if you have read anything about them but to list a few:
 
 - Automatic form tags generation based on the defined fields
 - Automatic CSRF validation
@@ -14,7 +14,9 @@ The advantages are obvious if you have read anything about them but to list a fe
 
 ## How to use?
 
-An example implementation will be added here soon.
+An example implementation on how to use this is available here:
+
+[https://github.com/mainio/c5_symfony_forms_example](https://github.com/mainio/c5_symfony_forms_example)
 
 ## Roadmap
 
