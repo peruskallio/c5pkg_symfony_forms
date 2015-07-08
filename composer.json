@@ -1,0 +1,34 @@
+{
+    "name": "mainio/c5-symfony-forms",
+    "type": "library",
+    "description": "Makes it possible to easily use the Symfony form builder within the concrete5 context. Utilizes the mainio/c5-twig-templates for easy building of the form view layer.",
+    "keywords": ["concrete5", "symfony", "forms"],
+    "homepage": "http://www.mainiotech.fi",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Antti Hukkanen",
+            "email": "antti.hukkanen@mainiotech.fi",
+            "homepage": "http://www.mainiotech.fi"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "symfony/form": "2.5.*",
+        "symfony/validator": "2.5.*",
+        "symfony/expression-language": "2.5.*",
+        "egulias/email-validator": "1.2.*",
+        "mainio/c5-twig-templates": "dev-master"
+    },
+    "autoload": {
+        "psr-4" : {
+            "Mainio\\C5\\SymfonyForms\\" : "src/",
+            "Mainio\\C5\\Symfony\\Form\\" : "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}

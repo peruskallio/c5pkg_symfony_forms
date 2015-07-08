@@ -1,0 +1,177 @@
+{# Custom extensions for the default symphony form layout. #}
+
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_widget_simple -%}
+    {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' form-control')|trim }) %}
+    {{ parent() }}
+{%- endblock form_widget_simple %}
+
+{% block textarea_widget -%}
+    {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' form-control')|trim }) %}
+    {{ parent() }}
+{%- endblock textarea_widget %}
+
+{% block choice_widget_collapsed -%}
+    {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' form-control')|trim }) %}
+    {{ parent() }}
+{%- endblock choice_widget_collapsed %}
+
+{% block choice_widget_expanded -%}
+    <div {{ block('widget_container_attributes') }}>
+    {%- for child in form %}
+        {% if multiple %}
+        <div class="checkbox">
+            <label>{{- form_widget(child) }} {{ child.vars.label|trans({}, translation_domain) -}}</label>
+        </div>
+        {% else %}
+        <div class="radio">
+            <label>{{- form_widget(child) }} {{ child.vars.label|trans({}, translation_domain) -}}</label>
+        </div>
+        {% endif %}
+    {% endfor -%}
+    </div>
+{% endblock choice_widget_expanded %}
+
+{% block form_row -%}
+    <div class="form-group">
+        {{ before }}
+        {% if block_prefixes[1] == "checkbox" %}
+            {% if block_prefixes[2] == "radio" %}
+            <div class="radio">
+                <label>{{- form_widget(form) }} {{ label|trans({}, translation_domain) }}</label>
+            </div>
+            {% else %}
+            <div class="checkbox">
+                <label>{{- form_widget(form) }} {{ label|trans({}, translation_domain) }}</label>
+            </div>
+            {% endif %}
+        {% else %}
+            {{- form_label(form) -}}
+            {{- form_widget(form) -}}
+        {% endif %}
+        {{ after }}
+
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock form_row %}
+
+{% block datetime_widget -%}
+    {% if widget == 'single_text' %}
+        {{- block('form_widget_simple') -}}
+    {% else %}
+        <div {{ block('widget_container_attributes') }}>
+            <div class="form-inline">
+                <div class="form-group">
+                    {{- form_widget(form.date) -}}
+                </div>
+                <div class="form-group">
+                    {{- form_widget(form.time) -}}
+                </div>
+            </div>
+            {{- form_errors(form.date) -}}
+            {{- form_errors(form.time) -}}
+        </div>
+    {% endif %}
+{%- endblock datetime_widget %}
+
+{% block date_widget -%}
+    {% if widget == 'single_text' %}
+        {{- block('form_widget_simple') -}}
+    {% else -%}
+        <div {{ block('widget_container_attributes') }}>
+            <div class="form-inline">
+                {{- date_pattern|replace({
+                    '{{ year }}':  form_widget(form.year),
+                    '{{ month }}': form_widget(form.month),
+                    '{{ day }}':   form_widget(form.day),
+                })|raw -}}
+            </div>
+        </div>
+    {%- endif %}
+{%- endblock date_widget %}
+
+{% block time_widget -%}
+    {% if widget == 'single_text' %}
+        {{- block('form_widget_simple') -}}
+    {% else -%}
+        {% set vars = widget == 'text' ? { 'attr': { 'size': 1 }} : {} %}
+        <div {{ block('widget_container_attributes') }}>
+            <div class="form-inline">
+                {{ form_widget(form.hour, vars) }}{% if with_minutes %} : {{ form_widget(form.minute, vars) }}{% endif %}{% if with_seconds %} : {{ form_widget(form.second, vars) }}{% endif %}
+            </div>
+        </div>
+    {%- endif %}
+{%- endblock time_widget %}
+
+{% block money_widget -%}
+    {% set currency = money_pattern|replace({'{{ widget }}': ''})|trim %}
+    {% if money_pattern matches '/^{{ widget }}.+$/' %}
+        <div class="input-group">
+            {{ block('form_widget_simple') }}
+            <div class="input-group-addon">{{ currency }}</div>
+        </div>
+    {% elseif money_pattern matches '/^.+{{ widget }}$/' %}
+        <div class="input-group">
+            <div class="input-group-addon">{{ currency }}</div>
+            {{ block('form_widget_simple') }}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{%- endblock money_widget %}
+
+{% block percent_widget -%}
+    {% set type = type|default('text') %}
+    <div class="input-group">
+        {{- block('form_widget_simple') -}}
+        <div class="input-group-addon">%</div>
+    </div>
+{%- endblock percent_widget %}
+
+{% block button_row -%}
+    <div>
+        {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' btn')|trim }) %}
+        {{- form_widget(form, { 'attr': attr }) -}}
+    </div>
+{%- endblock button_row %}
+
+{% block button_widget -%}
+    {% if label is empty -%}
+        {% set label = name|humanize %}
+    {%- endif -%}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain) }}</button>
+{%- endblock button_widget %}
+
+{% block form_actions_widget -%}
+    <div class="ccm-dashboard-form-actions-wrapper">
+        <div class="ccm-dashboard-form-actions">
+            {{ block('form_widget') }}
+        </div>
+    </div>
+{%- endblock form_actions_widget %}
+
+
+{% block selector_widget -%}
+    {{ selector|raw }}
+{%- endblock selector_widget %}
+
+{% block page_selector_widget -%}
+    {{ block('selector_widget') }}
+{%- endblock page_selector_widget %}
+
+{% block file_selector_widget -%}
+    {{ block('selector_widget') }}
+{%- endblock file_selector_widget %}
+
+{% block user_selector_widget -%}
+    {{ block('selector_widget') }}
+{%- endblock user_selector_widget %}
+
+{% block date_selector_widget -%}
+    {{ block('selector_widget') }}
+{%- endblock date_selector_widget %}
+
+{% block date_time_selector_widget -%}
+    {{ block('selector_widget') }}
+{%- endblock date_time_selector_widget %}
