@@ -12,6 +12,10 @@ within concrete5. The advantages are obvious if you have read anything about the
 - Making developing single page views with forms a lot faster
 - Less bugs in your code due to the nature of generalized and well tested components
 
+This package depends on the twig templates package for building the form views:
+
+[https://github.com/mainio/c5pkg_twig_templates](https://github.com/mainio/c5pkg_twig_templates)
+
 ## How to use?
 
 An example implementation on how to use this is available here:
