@@ -21,11 +21,6 @@ An example implementation on how to use this is available here:
 In order to use this, you will need to be running PHP 5.4 or newer in order to take advantage of the
 necessary trait provided by this package.
 
-## Roadmap
-
-- Make the templates work in themes
-- Make the templates work in block views
-
 ## License
 
 Licensed under the MIT license. See LICENSE for more information.
