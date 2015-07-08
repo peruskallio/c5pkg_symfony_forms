@@ -18,6 +18,9 @@ An example implementation on how to use this is available here:
 
 [https://github.com/mainio/c5_symfony_forms_example](https://github.com/mainio/c5_symfony_forms_example)
 
+In order to use this, you will need to be running PHP 5.4 or newer in order to take advantage of the
+necessary trait provided by this package.
+
 ## Roadmap
 
 - Make the templates work in themes
