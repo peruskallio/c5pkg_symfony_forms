@@ -18,6 +18,24 @@ This package depends on the twig templates package for building the form views:
 
 ## How to use?
 
+Add a composer.json file into your concrete5 package's directory. Into that
+file, add the following content:
+
+```
+{
+    "require": {
+        "mainio/c5-symfony-forms": "*"
+    }
+}
+```
+
+And then run `composer install` in the same directory. After this, add the
+following on top of your package controller (after the namespace definition):
+
+```php
+include(dirname(__FILE__) . '/vendor/autoload.php');
+```
+
 An example implementation on how to use this is available here:
 
 [https://github.com/mainio/c5_symfony_forms_example](https://github.com/mainio/c5_symfony_forms_example)
