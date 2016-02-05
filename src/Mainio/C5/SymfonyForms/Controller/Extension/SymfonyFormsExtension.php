@@ -21,7 +21,7 @@ trait SymfonyFormsExtension
         if (!isset($this->twig)) {
             $prefix = '';
             $page = $this->getPageObject();
-            if (strlen($page->getPackageID())) {
+            if (strlen($page->getPackageID()) && $page->getPackageID() > 0) {
                 $prefix = $page->getPackageHandle() . '/';
             }
             $this->twig = Core::make($prefix . 'environment/twig');
