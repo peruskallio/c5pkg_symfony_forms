@@ -12,13 +12,19 @@
             "homepage": "http://www.mainiotech.fi"
         }
     ],
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/pier5/c5pkg_twig_templates"
+        }
+    ],
     "require": {
         "php": ">=5.4.0",
         "symfony/form": "3.0.*",
         "symfony/validator": "3.0.*",
         "symfony/expression-language": "3.0.*",
         "egulias/email-validator": "1.2.*",
-        "mainio/c5-twig-templates": "0.1.*"
+        "mainio/c5-twig-templates": "dev-symfony-version-update"
     },
     "autoload": {
         "psr-4" : {
