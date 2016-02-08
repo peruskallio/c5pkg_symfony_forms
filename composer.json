@@ -14,9 +14,9 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "symfony/form": "3.0.*",
-        "symfony/validator": "3.0.*",
-        "symfony/expression-language": "3.0.*",
+        "symfony/form": "2.7.*",
+        "symfony/validator": "2.7.*",
+        "symfony/expression-language": "2.7.*",
         "egulias/email-validator": "1.2.*",
         "mainio/c5-twig-templates": "*"
     },
