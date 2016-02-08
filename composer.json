@@ -24,7 +24,7 @@
         "symfony/validator": "3.0.*",
         "symfony/expression-language": "3.0.*",
         "egulias/email-validator": "1.2.*",
-        "mainio/c5-twig-templates": "dev-symfony-version-update"
+        "mainio/c5-twig-templates": "dev-symfony-version-update as 0.2.0"
     },
     "autoload": {
         "psr-4" : {
