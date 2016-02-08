@@ -18,7 +18,7 @@
         "symfony/validator": "2.7.*",
         "symfony/expression-language": "2.7.*",
         "egulias/email-validator": "1.2.*",
-        "mainio/c5-twig-templates": "0.1.*"
+        "mainio/c5-twig-templates": "0.2.1"
     },
     "autoload": {
         "psr-4" : {
