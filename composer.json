@@ -15,7 +15,7 @@
     "repositories": [
         {
             "type": "git",
-            "url": "https://github.com/pier5/c5pkg_twig_templates"
+            "url": "https://github.com/mainio/c5pkg_twig_templates"
         }
     ],
     "require": {
