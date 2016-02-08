@@ -31,10 +31,5 @@
             "Mainio\\C5\\SymfonyForms\\" : "src/Mainio/C5/SymfonyForms/",
             "Mainio\\C5\\Symfony\\Form\\" : "src/Mainio/C5/Symfony/Form/"
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.1.x-dev"
-        }
     }
 }
