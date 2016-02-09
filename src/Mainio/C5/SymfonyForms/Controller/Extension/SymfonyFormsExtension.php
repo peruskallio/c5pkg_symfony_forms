@@ -58,13 +58,20 @@ trait SymfonyFormsExtension
 
     protected function createFormFactory(Twig_Environment $twig)
     {
-        $secret = md5(Config::get('concrete.misc.access_entity_updated') . Config::get('concrete.version_installed') . __FILE__);
-        $csrfProvider = new \Symfony\Component\Form\Extension\Csrf\CsrfProvider\DefaultCsrfProvider($secret);
+        $session = Core::make('session');
+
+        $csrfGenerator = new UriSafeTokenGenerator();
+        $csrfStorage = new SessionTokenStorage($session);
+        $csrfManager = new CsrfTokenManager($csrfGenerator, $csrfStorage);
 
         $formEngine = new \Symfony\Bridge\Twig\Form\TwigRendererEngine(array('form_concrete_layout.html.twig'));
         $formEngine->setEnvironment($twig);
         $twig->addExtension(new \Symfony\Bridge\Twig\Extension\FormExtension(
-            new \Symfony\Bridge\Twig\Form\TwigRenderer($formEngine, $csrfProvider))
+            new \Symfony\Bridge\Twig\Form\TwigRenderer($formEngine, $csrfManager))
+        );
+
+        $mr = new ManagerRegistry(
+            null, array(), array('em'), null, null, '\\Doctrine\\ORM\\Proxy\\Proxy'
         );
 
         // Set up the Validator component
@@ -72,7 +79,8 @@ trait SymfonyFormsExtension
 
         return \Symfony\Component\Form\Forms::createFormFactoryBuilder()
             ->addExtension(new \Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension())
-            ->addExtension(new \Symfony\Component\Form\Extension\Csrf\CsrfExtension($csrfProvider))
+            ->addExtension(new \Symfony\Bridge\Doctrine\Form\DoctrineOrmExtension($mr))
+            ->addExtension(new \Symfony\Component\Form\Extension\Csrf\CsrfExtension($csrfManager))
             ->addExtension(new \Symfony\Component\Form\Extension\Validator\ValidatorExtension($validator))
             ->addExtension(new \Mainio\C5\Symfony\Form\Extension\Concrete5\Concrete5Extension())
             ->getFormFactory();
