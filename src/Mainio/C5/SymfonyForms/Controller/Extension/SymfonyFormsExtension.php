@@ -5,7 +5,12 @@ namespace Mainio\C5\SymfonyForms\Controller\Extension;
 use Config;
 use Controller;
 use Core;
+use Database;
 use Twig_Environment;
+use Symfony\Component\Security\Csrf\TokenGenerator\UriSafeTokenGenerator;
+use Symfony\Component\Security\Csrf\TokenStorage\SessionTokenStorage;
+use Symfony\Component\Security\Csrf\CsrfTokenManager;
+use Application\Src\ManagerRegistry;
 
 /**
  * @author Antti Hukkanen <antti.hukkanen@mainiotech.fi>
@@ -71,7 +76,7 @@ trait SymfonyFormsExtension
         );
 
         $mr = new ManagerRegistry(
-            null, array(), array('em'), null, null, '\\Doctrine\\ORM\\Proxy\\Proxy'
+            'c5_symfony_forms_extension', Database::getConnections(), array('em'), Database::getDefaultConnection(), 'em', '\\Doctrine\\ORM\\Proxy\\Proxy'
         );
 
         // Set up the Validator component
