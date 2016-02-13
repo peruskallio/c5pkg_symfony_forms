@@ -10,7 +10,7 @@ use Twig_Environment;
 use Symfony\Component\Security\Csrf\TokenGenerator\UriSafeTokenGenerator;
 use Symfony\Component\Security\Csrf\TokenStorage\SessionTokenStorage;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
-use Application\Src\ManagerRegistry;
+use Mainio\C5\SymfonyForms\Controller\Extension\ManagerRegistry;
 
 /**
  * @author Antti Hukkanen <antti.hukkanen@mainiotech.fi>
