@@ -58,13 +58,12 @@ trait SymfonyFormsExtension
 
     protected function createFormFactory(Twig_Environment $twig)
     {
-        $secret = md5(Config::get('concrete.misc.access_entity_updated') . Config::get('concrete.version_installed') . __FILE__);
-        $csrfProvider = new \Symfony\Component\Form\Extension\Csrf\CsrfProvider\DefaultCsrfProvider($secret);
+        $tokenManager = new \Symfony\Component\Security\Csrf\CsrfTokenManager();
 
         $formEngine = new \Symfony\Bridge\Twig\Form\TwigRendererEngine(array('form_concrete_layout.html.twig'));
         $formEngine->setEnvironment($twig);
         $twig->addExtension(new \Symfony\Bridge\Twig\Extension\FormExtension(
-            new \Symfony\Bridge\Twig\Form\TwigRenderer($formEngine, $csrfProvider))
+            new \Symfony\Bridge\Twig\Form\TwigRenderer($formEngine, $tokenManager))
         );
 
         // Set up the Validator component
@@ -72,7 +71,7 @@ trait SymfonyFormsExtension
 
         return \Symfony\Component\Form\Forms::createFormFactoryBuilder()
             ->addExtension(new \Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension())
-            ->addExtension(new \Symfony\Component\Form\Extension\Csrf\CsrfExtension($csrfProvider))
+            ->addExtension(new \Symfony\Component\Form\Extension\Csrf\CsrfExtension($tokenManager))
             ->addExtension(new \Symfony\Component\Form\Extension\Validator\ValidatorExtension($validator))
             ->addExtension(new \Mainio\C5\Symfony\Form\Extension\Concrete5\Concrete5Extension())
             ->getFormFactory();
